@@ -1,6 +1,8 @@
 package com.github.oussamaM1.search;
 
+import com.github.oussamaM1.api.StackOverflowHttpClient;
 import io.micronaut.http.annotation.Options;
+import jakarta.inject.Inject;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
 
@@ -18,8 +20,13 @@ public class SearchCommand implements Runnable{
     @Option(names = {"--verbose"}  , description = "Print verbose output.")
     boolean verbose;
 
+    @Inject
+    StackOverflowHttpClient client;
+
     @Override
     public void run() {
         System.out.println("Search command running...");
+        var response = client.search(query , tag , limit , sort);
+        response.items.forEach(System.out::println);
     }
 }
