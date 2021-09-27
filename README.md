@@ -3,6 +3,15 @@ A simple Stackoverflow command line build with java , Micronaut Framework, Picoc
 
 ## Demo
 ```
+Usage: CLI-Stackoverflow [-hvV] [COMMAND]
+...
+  -h, --help      Show this help message and exit.
+  -v, --verbose   ...
+  -V, --version   Print version information and exit.
+Commands:
+  search  Search questions
+```
+```
 java -jar build/libs/CLI-Stackoverflow-*-all.jar search --verbose -t java -q "Collections" 
 
 Search command running...
