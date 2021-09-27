@@ -1,8 +1,10 @@
 package com.github.oussamaM1.search;
 
+import com.github.oussamaM1.api.Question;
 import com.github.oussamaM1.api.StackOverflowHttpClient;
 import io.micronaut.http.annotation.Options;
 import jakarta.inject.Inject;
+import picocli.CommandLine.Help.Ansi;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
 
@@ -27,6 +29,28 @@ public class SearchCommand implements Runnable{
     public void run() {
         System.out.println("Search command running...");
         var response = client.search(query , tag , limit , sort);
-        response.items.forEach(System.out::println);
+        response.items.stream()
+                .map(SearchCommand::format)
+                .forEach(System.out::println);
+
+        if (verbose) {
+            System.out.printf(
+                    "\nItems size: %d | Quota max: %d | Quota remaining: %d | Has more: %s\n",
+                    response.items.size(),
+                    response.quotaMax,
+                    response.quotaRemaining,
+                    response.hasMore
+            );
+        }
+    }
+    static private String format(final Question question) {
+        return Ansi.AUTO.string(String.format(
+                "@|bold,fg(green) %s|@ %d|%d @|bold,fg(yellow) %s|@\n      %s",
+                question.accepted ? "->" : "",
+                question.score,
+                question.answers,
+                question.title,
+                question.link
+        ));
     }
 }
