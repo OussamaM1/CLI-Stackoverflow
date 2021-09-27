@@ -1,5 +1,6 @@
 package com.github.oussamaM1;
 
+import com.github.oussamaM1.search.SearchCommand;
 import io.micronaut.configuration.picocli.PicocliRunner;
 import io.micronaut.context.ApplicationContext;
 
@@ -9,7 +10,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 @Command(name = "CLI-Stackoverflow", description = "...",
-        mixinStandardHelpOptions = true)
+        mixinStandardHelpOptions = true , subcommands = {SearchCommand.class})
 public class CLIStackoverflowCommand implements Runnable {
 
     @Option(names = {"-v", "--verbose"}, description = "...")
