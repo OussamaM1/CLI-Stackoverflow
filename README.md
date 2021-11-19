@@ -1,4 +1,4 @@
-# CLI-Stackoverflow
+# ⚙️ CLI-Stackoverflow
 A simple Stackoverflow command line build with java , Micronaut Framework, Picocli, and compiled to the native executable file with the GraalVM.
 
 ## Demo
